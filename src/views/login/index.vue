@@ -67,6 +67,7 @@
 
 <script>
 import { validUsername, validMobile } from "@/utils/validate";
+// 引入辅助方法 mapActions
 import { mapActions } from "vuex";
 export default {
   name: "Login",
@@ -126,14 +127,15 @@ export default {
       });
     },
     handleLogin() {
+      console.log(this.loginForm);
       // 表单的手动校验
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           try {
             this.loading = true;
-            // 只有校验成功了 采取调用action
+            // 只有校验成功了 采取调用action  因为调用的是子模块的action namespace开启了需要加上模块名/方法
             await this.$store.dispatch("user/login", this.loginForm);
-            // 登陆成功之后
+            // 登陆成功之后跳转首页
             this.$router.push("/");
           } catch (error) {
             console.log(error);
