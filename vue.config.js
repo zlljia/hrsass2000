@@ -43,7 +43,7 @@ module.exports = {
         target: 'http://ihrm-java.itheima.net/', // 要代理的服务器地址  这里不用写 api
         changeOrigin: true // 是否跨域
         // 重写路径
-        // pathRewrite: {}
+        // pathRewrite: {}  // 后续进行配置
       }
     }
     // before: require('./mock/mock-server.js')
