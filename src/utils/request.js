@@ -9,8 +9,6 @@ const service = axios.create({
 service.interceptors.request.use()
 service.interceptors.response.use((response) => {
     // axios默认加了一层data
-    console.log(response.data);
-
     const { success, message, data } = response.data
     if (success) {
         return data

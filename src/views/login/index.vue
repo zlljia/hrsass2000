@@ -127,7 +127,6 @@ export default {
       });
     },
     handleLogin() {
-      console.log(this.loginForm);
       // 表单的手动校验
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
