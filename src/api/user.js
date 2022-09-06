@@ -1,6 +1,9 @@
 import request from '@/utils/request'
 
-export function login(data) {
+/* 
+* 登录的接口
+*/
+export const login = (data) => {
   return request({
     url: '/sys/login',
     method: 'post',
