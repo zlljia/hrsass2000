@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /* 
 * 登录的接口
 */
-export const login = (data) => {
+export const HRlogin = (data) => {
   return request({
     url: '/sys/login',
     method: 'post',
@@ -11,8 +11,14 @@ export const login = (data) => {
   })
 }
 
-export function getInfo(token) {
-
+/* 
+* 获取用户信息的接口
+*/
+export const HRgetUserInfo = () => {
+  return request({
+    url: 'sys/profile',
+    method: 'post'
+  })
 }
 
 export function logout() {
