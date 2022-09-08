@@ -13,6 +13,13 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+// 引入自定义指令的配置
+import *as directives from '@/directives'
+// 获取对象的key值的数组 遍历全局注册自定义指令
+Object.keys(directives).forEach(item => {
+  Vue.directive(item, directives[item])
+})
+
 import '@/icons' // icon
 import '@/permission' // permission control
 

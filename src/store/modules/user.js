@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-// 引入登录接口 获取用户资料的接口
-import { HRlogin, HRgetUserInfo } from '@/api/user'
+// 引入登录接口 获取用户资料的接口 获取用户详情的接口
+import { HRlogin, HRgetUserInfo, HRgetUserDetailById } from '@/api/user'
 
 const state = {
   token: getToken(), // 设置token为共享状态，获取的时候就先从缓存获取
@@ -33,11 +33,22 @@ const actions = {
     const result = await HRlogin(data) // 拿到token
     context.commit('setToken', result) // 设置token
   },
-  // 获取用户资料
-  async getUserInfo() {
+  // 获取用户资料信息
+  async getUserInfo(context) {
     const result = await HRgetUserInfo()
-    context.commit('setUserInfo', result)
-    return result
+    // 获取用户详情信息
+    const baseInfo = await HRgetUserDetailById(result.userId)
+    // 合并数据 用户信息数据
+    const baseResult = { ...result, ...baseInfo }
+    context.commit('setUserInfo', baseResult)
+    return baseResult
+  },
+  // 退出登录
+  logout(context) {
+    // 清空token
+    context.commit('removeToken')
+    // 清空用户数据
+    context.commit('removeUserInfo')
   }
 }
 export default {

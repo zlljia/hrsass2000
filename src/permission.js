@@ -14,7 +14,7 @@ import getPageTitle from '@/utils/get-page-title'
 // 不需要token也能访问的页面
 const whiteRoutes = ['/login', '/404']
 // 全局路由前置守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start() // 开启进度条
   // 判断是否存在token
   if (store.getters.token) {
@@ -24,6 +24,10 @@ router.beforeEach((to, from, next) => {
       // 放行到主页
       next('/')
     } else {
+      // 没有userId 证明还没有获取到用户信息
+      if (!store.getters.userId) {
+        await store.dispatch('user/getUserInfo')
+      }
       // 直接放行
       next()
     }

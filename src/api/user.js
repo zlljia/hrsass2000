@@ -21,6 +21,16 @@ export const HRgetUserInfo = () => {
   })
 }
 
+/* 
+* 根据用户id获取用户详细信息
+*/
+export const HRgetUserDetailById = (id) => {
+  return request({
+    url: `sys/user/${id}`,
+    method: 'get'
+  })
+}
+
 export function logout() {
 
 }
